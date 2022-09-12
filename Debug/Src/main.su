@@ -1,0 +1,9 @@
+../Src/main.c:77:5:main	40	static
+../Src/main.c:170:9:Definir_Estado	24	static
+../Src/main.c:188:6:Activar_Estado_Critico	16	static
+../Src/main.c:196:6:Activar_Estado_Alto	8	static
+../Src/main.c:201:6:Activar_Estado_Medio	8	static
+../Src/main.c:206:6:Activar_Estado_Bajo	8	static
+../Src/main.c:211:6:Activar_Estado_Bajo_Cero	8	static
+../Src/main.c:221:13:SystemClock_Config	88	static
+../Src/main.c:273:13:Error_Handler	8	static
