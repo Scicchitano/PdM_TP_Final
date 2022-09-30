@@ -1,5 +1,8 @@
+"./Drivers/API/API_debounce/src/API_debounce.o"
+"./Drivers/API/API_uart/src/API_uart.o"
 "./Drivers/API/src/API_delay.o"
 "./Drivers/BSP/STM32F4xx_Nucleo_144/stm32f4xx_nucleo_144.o"
+"./Drivers/Buzzer/src/Buzzer.o"
 "./Drivers/CMSIS/system_stm32f4xx.o"
 "./Drivers/Core/Src/stm32f4xx_it.o"
 "./Drivers/Core/Src/syscalls.o"

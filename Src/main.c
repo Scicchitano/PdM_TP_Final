@@ -20,8 +20,10 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "API_delay.h"
 #include "SensorTemp.h"
+#include "API_debounce.h"
+//#include "Buzzer.h"
+
 
 /** @addtogroup STM32F4xx_HAL_Examples
  * @{
@@ -53,7 +55,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* UART handler declaration */
-UART_HandleTypeDef UartHandle;
+ADC_HandleTypeDef hadc1;
 
 /* Private function prototypes -----------------------------------------------*/
 
@@ -86,10 +88,13 @@ int main(void)
        - Set NVIC Group Priority to 4
        - Low Level Initialization
 	 */
+	uint16_t AD_RES = 0;
 	HAL_Init();
 
 	/* Configure the system clock to 180 MHz */
 	SystemClock_Config();
+	//HAL_ADCEx_Calibration_Start(&hadc1);
+
 
 	/* Initialize BSP Led for LED */
 	delay_t Timer_Alarma;
@@ -103,11 +108,15 @@ int main(void)
 	BSP_LED_Init(LED1);
 	BSP_LED_Init(LED2);
 	BSP_LED_Init(LED3);
+	BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
+
 
 	BSP_LED_Off(LED1);
 	BSP_LED_Off(LED2);
 	BSP_LED_Off(LED3);
 
+	debounceFSM_init();
+	SensorTemp_Init();
 
 
 	int16_t Temp = 0;
@@ -116,9 +125,15 @@ int main(void)
 	/* Infinite loop */
 	while (1)
 	{
-		if (delayReadState(&Timer_Temp)) {
-			Temp = SensorTemp_Read();
-			Estado = Definir_Estado(Temp);
+
+		debounceFSM_update();
+		if (readKey()) {
+			Estado = Estado_Critico;
+		}else{
+			if (delayReadState(&Timer_Temp)) {
+				Temp = SensorTemp_Read();
+				Estado = Definir_Estado(Temp);
+			}
 		}
 		switch (Estado) {
 			case Estado_Critico:
@@ -190,6 +205,7 @@ void Activar_Estado_Critico (delay_t * delay){
 		BSP_LED_Toggle(LED1);
 		BSP_LED_Toggle(LED2);
 		BSP_LED_Toggle(LED3);
+//		Buzzer_toggle();
 	}
 
 }
@@ -197,21 +213,25 @@ void Activar_Estado_Alto(void){
 	BSP_LED_On(LED1);
 	BSP_LED_On(LED2);
 	BSP_LED_On(LED3);
+//	Buzzer_write(GPIO_PIN_RESET);
 }
 void Activar_Estado_Medio(void){
 	BSP_LED_On(LED1);
 	BSP_LED_On(LED2);
 	BSP_LED_Off(LED3);
+//	Buzzer_write(GPIO_PIN_RESET);
 }
 void Activar_Estado_Bajo(void){
 	BSP_LED_On(LED1);
 	BSP_LED_Off(LED2);
 	BSP_LED_Off(LED3);
+//	Buzzer_write(GPIO_PIN_RESET);
 }
 void Activar_Estado_Bajo_Cero(void){
 	BSP_LED_Off(LED1);
 	BSP_LED_Off(LED2);
 	BSP_LED_Off(LED3);
+//	Buzzer_write(GPIO_PIN_SET);
 }
 
 
@@ -278,6 +298,12 @@ static void Error_Handler(void)
 	{
 	}
 }
+
+
+
+
+
+
 
 #ifdef  USE_FULL_ASSERT
 /**

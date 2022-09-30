@@ -21,8 +21,11 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+Drivers/API/API_debounce/src \
+Drivers/API/API_uart/src \
 Drivers/API/src \
 Drivers/BSP/STM32F4xx_Nucleo_144 \
+Drivers/Buzzer/src \
 Drivers/CMSIS \
 Drivers/Core/Src \
 Drivers/STM32F4xx_HAL_Driver/Src/Legacy \
