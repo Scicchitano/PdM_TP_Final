@@ -38,10 +38,7 @@ Src/main.o: ../Src/main.c ../Inc/main.h \
  C:/Users/diego/Documents/Especializacion\ Sistemas\ Embebidos/Primer\ Bimestre/Programacion\ de\ Microprocesadores/TP_Final/PdM_TP_Final/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  C:/Users/diego/Documents/Especializacion\ Sistemas\ Embebidos/Primer\ Bimestre/Programacion\ de\ Microprocesadores/TP_Final/PdM_TP_Final/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  C:/Users/diego/Documents/Especializacion\ Sistemas\ Embebidos/Primer\ Bimestre/Programacion\ de\ Microprocesadores/TP_Final/PdM_TP_Final/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- C:/Users/diego/Documents/Especializacion\ Sistemas\ Embebidos/Primer\ Bimestre/Programacion\ de\ Microprocesadores/TP_Final/PdM_TP_Final/Drivers/BSP/STM32F4xx_Nucleo_144/stm32f4xx_nucleo_144.h \
- C:/Users/diego/Documents/Especializacion\ Sistemas\ Embebidos/Primer\ Bimestre/Programacion\ de\ Microprocesadores/TP_Final/PdM_TP_Final/Drivers/SensorTemp/inc/SensorTemp.h \
- C:/Users/diego/Documents/Especializacion\ Sistemas\ Embebidos/Primer\ Bimestre/Programacion\ de\ Microprocesadores/TP_Final/PdM_TP_Final/Drivers/API/API_debounce/inc/API_debounce.h \
- C:/Users/diego/Documents/Especializacion\ Sistemas\ Embebidos/Primer\ Bimestre/Programacion\ de\ Microprocesadores/TP_Final/PdM_TP_Final/Drivers/API/inc/API_delay.h
+ C:/Users/diego/Documents/Especializacion\ Sistemas\ Embebidos/Primer\ Bimestre/Programacion\ de\ Microprocesadores/TP_Final/PdM_TP_Final/Drivers/BSP/STM32F4xx_Nucleo_144/stm32f4xx_nucleo_144.h
 ../Inc/main.h:
 C:/Users/diego/Documents/Especializacion\ Sistemas\ Embebidos/Primer\ Bimestre/Programacion\ de\ Microprocesadores/TP_Final/PdM_TP_Final/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Inc/stm32f4xx_hal_conf.h:
@@ -83,6 +80,3 @@ C:/Users/diego/Documents/Especializacion\ Sistemas\ Embebidos/Primer\ Bimestre/P
 C:/Users/diego/Documents/Especializacion\ Sistemas\ Embebidos/Primer\ Bimestre/Programacion\ de\ Microprocesadores/TP_Final/PdM_TP_Final/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 C:/Users/diego/Documents/Especializacion\ Sistemas\ Embebidos/Primer\ Bimestre/Programacion\ de\ Microprocesadores/TP_Final/PdM_TP_Final/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 C:/Users/diego/Documents/Especializacion\ Sistemas\ Embebidos/Primer\ Bimestre/Programacion\ de\ Microprocesadores/TP_Final/PdM_TP_Final/Drivers/BSP/STM32F4xx_Nucleo_144/stm32f4xx_nucleo_144.h:
-C:/Users/diego/Documents/Especializacion\ Sistemas\ Embebidos/Primer\ Bimestre/Programacion\ de\ Microprocesadores/TP_Final/PdM_TP_Final/Drivers/SensorTemp/inc/SensorTemp.h:
-C:/Users/diego/Documents/Especializacion\ Sistemas\ Embebidos/Primer\ Bimestre/Programacion\ de\ Microprocesadores/TP_Final/PdM_TP_Final/Drivers/API/API_debounce/inc/API_debounce.h:
-C:/Users/diego/Documents/Especializacion\ Sistemas\ Embebidos/Primer\ Bimestre/Programacion\ de\ Microprocesadores/TP_Final/PdM_TP_Final/Drivers/API/inc/API_delay.h:

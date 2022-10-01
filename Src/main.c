@@ -20,8 +20,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "SensorTemp.h"
-#include "API_debounce.h"
+
+
 //#include "Buzzer.h"
 
 
@@ -35,20 +35,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define Delay_Alarma 200
-#define Muestreo_Temp 2000
 
-// Typedef enum?
-#define Min_Temp_Critica 40
-#define Min_Temp_Alta 30
-#define Min_Temp_Media 15
-#define Min_Temp_Baja 0
-
-#define Estado_Critico 4
-#define Estado_Alto 3
-#define Estado_Medio 2
-#define Estado_Bajo 1
-#define Estado_Bajo_Cero 0
 
 
 #define ARRAYLENGTH(x) (sizeof x/sizeof x[0])
@@ -62,13 +49,9 @@ ADC_HandleTypeDef hadc1;
 static void SystemClock_Config(void);
 static void Error_Handler(void);
 
-static void Activar_Estado_Critico(delay_t * delay);
-static void Activar_Estado_Alto(void);
-static void Activar_Estado_Medio(void);
-static void Activar_Estado_Bajo(void);
-static void Activar_Estado_Bajo_Cero(void);
 
-static uint8_t Definir_Estado(int16_t Temp);
+
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -88,7 +71,6 @@ int main(void)
        - Set NVIC Group Priority to 4
        - Low Level Initialization
 	 */
-	uint16_t AD_RES = 0;
 	HAL_Init();
 
 	/* Configure the system clock to 180 MHz */
@@ -96,64 +78,12 @@ int main(void)
 	//HAL_ADCEx_Calibration_Start(&hadc1);
 
 
-	/* Initialize BSP Led for LED */
-	delay_t Timer_Alarma;
-	delayInit(&Timer_Alarma, Delay_Alarma);
-	
-	delay_t Timer_Temp;
-	delayInit(&Timer_Temp, Muestreo_Temp);
-	
-
-	/* Inicializo todos los LEDS en OFF*/
-	BSP_LED_Init(LED1);
-	BSP_LED_Init(LED2);
-	BSP_LED_Init(LED3);
-	BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
-
-
-	BSP_LED_Off(LED1);
-	BSP_LED_Off(LED2);
-	BSP_LED_Off(LED3);
-
-	debounceFSM_init();
-	SensorTemp_Init();
-
-
-	int16_t Temp = 0;
-	uint8_t Estado = 0;
+	ControlFSM_init();
 
 	/* Infinite loop */
 	while (1)
 	{
-
-		debounceFSM_update();
-		if (readKey()) {
-			Estado = Estado_Critico;
-		}else{
-			if (delayReadState(&Timer_Temp)) {
-				Temp = SensorTemp_Read();
-				Estado = Definir_Estado(Temp);
-			}
-		}
-		switch (Estado) {
-			case Estado_Critico:
-				Activar_Estado_Critico(&Timer_Alarma);
-				break;
-			case Estado_Alto:
-				Activar_Estado_Alto();
-				break;
-			case Estado_Medio:
-				Activar_Estado_Medio();
-				break;
-			case Estado_Bajo:
-				Activar_Estado_Bajo();
-				break;
-			case Estado_Bajo_Cero:
-				Activar_Estado_Bajo_Cero();
-				break;
-			default:
-				break;
-		}
+		ControlFSM_update();
 	}
 }
 
@@ -182,57 +112,7 @@ int main(void)
 
 
 
-uint8_t Definir_Estado(int16_t Temp){
-	uint8_t Estado = 0;
-	if (Temp>=Min_Temp_Critica) {
-		Estado = Estado_Critico;
-	} else if (Temp>=Min_Temp_Alta) {
-		Estado = Estado_Alto;
-	} else if (Temp>=Min_Temp_Media) {
-		Estado = Estado_Medio;
-	} else if (Temp>=Min_Temp_Baja) {
-		Estado = Estado_Bajo;
-	} else {
-		Estado = Estado_Bajo_Cero;
-	}
 
-	return Estado;
-}
-
-
-void Activar_Estado_Critico (delay_t * delay){
-	if (delayReadState(delay)) {
-		BSP_LED_Toggle(LED1);
-		BSP_LED_Toggle(LED2);
-		BSP_LED_Toggle(LED3);
-//		Buzzer_toggle();
-	}
-
-}
-void Activar_Estado_Alto(void){
-	BSP_LED_On(LED1);
-	BSP_LED_On(LED2);
-	BSP_LED_On(LED3);
-//	Buzzer_write(GPIO_PIN_RESET);
-}
-void Activar_Estado_Medio(void){
-	BSP_LED_On(LED1);
-	BSP_LED_On(LED2);
-	BSP_LED_Off(LED3);
-//	Buzzer_write(GPIO_PIN_RESET);
-}
-void Activar_Estado_Bajo(void){
-	BSP_LED_On(LED1);
-	BSP_LED_Off(LED2);
-	BSP_LED_Off(LED3);
-//	Buzzer_write(GPIO_PIN_RESET);
-}
-void Activar_Estado_Bajo_Cero(void){
-	BSP_LED_Off(LED1);
-	BSP_LED_Off(LED2);
-	BSP_LED_Off(LED3);
-//	Buzzer_write(GPIO_PIN_SET);
-}
 
 
 

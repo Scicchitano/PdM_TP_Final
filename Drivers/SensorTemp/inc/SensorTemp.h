@@ -18,5 +18,6 @@
 
 
 
-void SensorTemp_Init();
-int16_t SensorTemp_Read();
+void SensorTemp_Init(void);
+int8_t SensorTemp_Read(void);
+int str_to_decimal(const char *s);

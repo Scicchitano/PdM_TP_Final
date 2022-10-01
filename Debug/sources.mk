@@ -21,6 +21,7 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+Drivers/API/API_Control_Estados/src \
 Drivers/API/API_debounce/src \
 Drivers/API/API_uart/src \
 Drivers/API/src \

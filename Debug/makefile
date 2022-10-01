@@ -21,6 +21,7 @@ RM := rm -rf
 -include Drivers/API/src/subdir.mk
 -include Drivers/API/API_uart/src/subdir.mk
 -include Drivers/API/API_debounce/src/subdir.mk
+-include Drivers/API/API_Control_Estados/src/subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)

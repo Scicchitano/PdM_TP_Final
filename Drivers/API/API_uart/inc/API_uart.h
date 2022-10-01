@@ -50,7 +50,7 @@ void uartSendStringSize(uint8_t * pstring, uint16_t size);
  *
  * @return
  */
-void uartReceiveStringSize(uint8_t * pstring, uint16_t size);
+HAL_StatusTypeDef uartReceiveStringSize(uint8_t * pstring, uint16_t size);
 
 
 
