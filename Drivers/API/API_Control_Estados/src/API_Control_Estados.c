@@ -10,7 +10,7 @@
 
 
 #define Delay_Alarma 200
-#define Muestreo_Temp 2000
+#define Muestreo_Temp 3000
 
 // Typedef enum?
 #define Min_Temp_Critica 40
@@ -43,6 +43,7 @@ delay_t Timer_Alarma;
 uint8_t Estado = 0;
 int16_t Temp = 0;
 
+bool flagButton = false;
 
 
 void ControlFSM_init(void){
@@ -81,9 +82,15 @@ void ControlFSM_update(void) {
 
 		case DEFINICION_ESTADO:
 			if (readKey()) {
-				Estado = Estado_Critico;
-			}else{
-					Estado = Definir_Estado(Temp);
+				if (flagButton) {
+					flagButton = false;
+				}else {
+					flagButton = true;
+					Estado = Estado_Critico;
+				}
+			}
+			if (!flagButton) {
+				Estado = Definir_Estado(Temp);
 			}
 			curr_state = ACTIVACION_ESTADO;
 			break;

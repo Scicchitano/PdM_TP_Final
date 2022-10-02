@@ -30,7 +30,7 @@
 
 
 /* MACROS DE USUARIO*/
-#define BaudVel 9600  //Especifique la velocidad en baudios
+#define BaudVel 115200  //Especifique la velocidad en baudios
 #define Timeout_UART 1000
 #define MAX_Size_String_UART 100 //Solo se enviara como maximo MAX_Size_String_UART caracteres
 
